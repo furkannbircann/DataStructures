@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Security.Principal;
+using System.Threading;
 using System.Collections;
 class Program
 {
@@ -6,7 +7,7 @@ class Program
     public static void Main(string[] args)
     {
 
-        
+
         // TreeExamp();
         // SortedSetExamp2();
         // SortedSetExamp();
@@ -245,6 +246,33 @@ class Node
         this.Right = null;
     }
 }
+class List
+{
+    public Node? Root { get; set; }
+    public List()
+    {
+        Root = null;
+    }
+    public void Add(int data)
+    {
+        Node nodeItem = new Node(data);
+        if (Root == null)
+        {
+            Root = nodeItem;
+            Console.WriteLine("Liste oluşturuldu.İlk node eklendi!!");
+        }
+        else
+        {
+            Node iter = Root;
+            while (iter.Right != null)
+            {
+                iter = iter.Right;
+            }
+            iter.Right = nodeItem;
+        }
+
+    }
+}
 class Tree
 {
     public Node? Root { get; set; }
@@ -305,4 +333,77 @@ class Tree
     }
 
 }
-
+class Stack
+{
+    public Node? Top;
+    public Stack()
+    {
+        Top = null;
+    }
+    public void Push(int data)
+    {
+        Node nodeItem = new Node(data);
+        if (Top == null)
+        {
+            Top = nodeItem;
+            Console.WriteLine("Stack yapısı oluşturuldu,İlk node yerleştirildi");
+        }
+        else
+        {
+            nodeItem.Right = Top;
+            Top = nodeItem;
+            Console.WriteLine("Node eklendi");
+        }
+    }
+    public void Pop()
+    {
+        if (Top == null)
+        {
+            Console.WriteLine("Stack boş");
+        }
+        else
+        {
+            int topData = Top.Data;
+            Top = Top.Right;
+            Console.WriteLine($"{topData} stack'ten atıldı");
+        }
+    }
+}
+class Queue
+{
+    public Node? Front { get; set; }
+    public Node? Rear { get; set; }
+    public Queue()
+    {
+        this.Front = null;
+        this.Rear = null;
+    }
+    public void Enqueue(int data)
+    {
+        Node nodeItem = new Node(data);
+        if (Front == null)
+        {
+            Front = Rear = nodeItem;
+            Console.WriteLine("Queue oluşturuldu . İlk node eklendi");
+        }
+        else
+        {
+            Rear.Right = nodeItem;
+            Rear = nodeItem;
+            Console.WriteLine("Queue ekleme yapıldı");
+        }
+    }
+    public void Dequeue(int data)
+    {
+        if (Front == null)
+        {
+            Console.WriteLine("Queue boş!");
+        }
+        else
+        {
+            int frontData = Front.Data;
+            Front = Front.Right;
+            Console.WriteLine($"{frontData} kuyruktan çıkartıldı.");
+        }
+    }
+}
